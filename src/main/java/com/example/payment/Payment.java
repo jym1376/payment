@@ -19,6 +19,16 @@ public class Payment {
 
     @PostPersist
     public void onPostPersist(){
+
+        // circuit breaker start
+        // try {
+        //     Thread.currentThread().sleep((long) (400 + Math.random() * 220));
+        // } catch (Exception e) {
+        //     //TODO: handle exception
+        //     e.printStackTrace();
+        // }
+        // circuit breaker end
+
         PaymentApproved paymentApproved = new PaymentApproved();
         BeanUtils.copyProperties(this, paymentApproved);
         paymentApproved.publishAfterCommit();
